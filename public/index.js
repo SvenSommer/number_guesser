@@ -52,14 +52,22 @@ function handleSliderChange() {
 
 function createButtons(number) {
     buttonsContainer.innerHTML = '';
+    const gridSize = Math.ceil(Math.sqrt(number)); // Calculate grid size
+    const buttonWidth = (100 / gridSize) - 2; // Subtract margin for width
+    const buttonHeight = (window.innerHeight / gridSize) - 35; // Calculate height based on window height
+
     for (let i = 1; i <= number; i++) {
         const button = document.createElement('button');
         button.textContent = i;
         button.id = `btn-${i}`;
+        button.style.flexBasis = `${buttonWidth}%`;
+        button.style.height = `${buttonHeight}px`; // Set height
         button.addEventListener('click', () => makeGuess(i));
         buttonsContainer.appendChild(button);
     }
 }
+
+
 
 function calculateMaxAttempts(number) {
     return Math.ceil(Math.log2(number));
@@ -71,8 +79,7 @@ function makeGuess(number) {
     updateProgressBar();
 
     if (attemptCount > maxAttempts) {
-        alert("You've exceeded the maximum number of attempts. Game over!");
-        window.location.reload();
+        gameOver()
         return;
     }
 
@@ -90,6 +97,24 @@ function handleGuessResponse(data, guessedNumber) {
         updateButtonVisibility(data.result, guessedNumber);
     }
 }
+function gameOver() {
+    const modal = document.getElementById('gameOverModal');
+    modal.style.display = 'block';
+
+    const closeButton = modal.querySelector('.close');
+    closeButton.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    const restartButton = document.getElementById('restartGame');
+    restartButton.onclick = function() {
+        modal.style.display = 'none';
+        restartGame(); // Assuming you have a function to restart the game
+    }
+}
+
+
+
 
 function showWinningMessage() {
     // Trigger confetti

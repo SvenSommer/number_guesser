@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Number Guessing Game</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
     <h1>Guess the Number</h1>
     <div>
@@ -25,8 +27,18 @@
         <p>Congratulations! You guessed the right number!</p>
         <button id="restartButton">Restart Game</button>
     </div>
-    
+    <div id="gameOverModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Game Over</h2>
+            <p>You've exceeded the maximum number of attempts.</p>
+            <button id="restartGame">Restart Game</button>
+        </div>
+    </div>
+
+
 
     <script src="index.js"></script>
 </body>
+
 </html>

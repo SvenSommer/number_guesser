@@ -30,8 +30,6 @@ app.get("/", (req, res) => {
 // Handle guess
 app.get("/guess/:number", (req, res) => {
     const guessedNumber = parseInt(req.params.number, 10);
-    console.log("guessedNumber", guessedNumber)
-    console.log("secretNumber", secretNumber)
     if (guessedNumber === secretNumber) {
         res.json({ result: "correct" });
     } else if (guessedNumber < secretNumber) {

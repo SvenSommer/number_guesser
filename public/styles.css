@@ -4,16 +4,28 @@ body {
     padding: 20px;
 }
 
+#buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch; /* Align items in a stretch manner */
+    height: 100%; /* Optional: Set the container height to full window height */
+}
+
 #buttons button {
     margin: 5px;
     padding: 10px;
-    width: 60px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    flex-grow: 1; /* Allow buttons to grow to fill space */
+    text-align: center;
+    box-sizing: border-box;
 }
+
+
 
 #buttons button:hover {
     background-color: #45a049;
@@ -107,4 +119,48 @@ body {
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
     border-radius: 50%; /* Circular shape */
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#restartGame {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
 }
