@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+#buttons button {
+    margin: 5px;
+    padding: 10px;
+    width: 60px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#buttons button:hover {
+    background-color: #45a049;
+}
+#progressBarContainer {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 5px;
+    margin: 10px 0;
+    position: relative;
+}
+
+#progressBar {
+    height: 40px;
+    width: 0%;
+    background-color: green;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    color: white;
+    font-weight: bold;
+}
+
+#progressText {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#winMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: center;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+#restartButton {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1em; /* Font size */
+    margin-top: 20px; /* Space above the button */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+#restartButton:hover {
+    background-color: #45a049; /* Darker shade of green on hover */
+}
+
+#rangeSlider {
+    -webkit-appearance: none; /* Override default appearance */
+    appearance: none;
+    width: 20%; /* Full-width */
+    height: 15px; /* Increased height of the slider */
+    background: #ddd; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (optional) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    border-radius: 5px; /* Rounded corners */
+}
+
+#rangeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default appearance */
+    appearance: none;
+    width: 25px; /* Increased width and height */
+    height: 25px;
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%; /* Circular shape */
+}
+
+#rangeSlider::-moz-range-thumb {
+    width: 25px; /* Increased width and height */
+    height: 25px;
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 50%; /* Circular shape */
+}
