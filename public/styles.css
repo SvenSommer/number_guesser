@@ -3,37 +3,37 @@ body {
     text-align: center;
     padding: 20px;
 }
+
 .hidden {
     display: none;
 }
+
 #preferencesPanel {
     position: absolute;
-    top: 40px; /* Adjust based on the size of your icon */
+    top: 40px;
     right: 10px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 2; /* Higher z-index */
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 #preferencesIcon i {
-    font-size: 24px; /* Adjust the size as needed */
-    color: #333; /* Adjust the color as needed */
+    font-size: 24px;
+    color: #333;
 }
-
-
 
 #buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: stretch; /* Align items in a stretch manner */
-    height: 100%; /* Optional: Set the container height to full window height */
+    align-items: stretch;
+    height: 100%;
 }
 
 #buttons button {
@@ -44,12 +44,10 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    flex-grow: 1; /* Allow buttons to grow to fill space */
+    flex-grow: 1;
     text-align: center;
     box-sizing: border-box;
 }
-
-
 
 #buttons button:hover {
     background-color: #45a049;
@@ -62,7 +60,7 @@ body {
     border-radius: 5px;
     margin: 10px 0;
     position: relative;
-    z-index: 1; /* Lower z-index */
+    z-index: 1;
 }
 
 #progressBar {
@@ -70,10 +68,10 @@ body {
     width: 0%;
     background-color: green;
     border-radius: 5px;
-    transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    transition: width 0.5s, background-color 0.5s;
     display: flex;
-    align-items: center; /* Center text vertically */
-    justify-content: center; /* Center text horizontally */
+    align-items: center;
+    justify-content: center;
     color: white;
     font-weight: bold;
 }
@@ -84,89 +82,65 @@ body {
     text-align: center;
 }
 
-.hidden {
-    display: none;
-}
-
-#winMessage {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#winMessage, .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     text-align: center;
-    z-index: 1000; /* Ensure it's above other elements */
+    z-index: 1000;
 }
 
-#restartButton {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding around the text */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 1em; /* Font size */
-    margin-top: 20px; /* Space above the button */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+#restartButton, #restartGame {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    transition: background-color 0.3s;
 }
 
-#restartButton:hover {
-    background-color: #45a049; /* Darker shade of green on hover */
+#restartButton:hover, #restartGame:hover {
+    background-color: #45a049;
 }
 
 #rangeSlider {
-    -webkit-appearance: none; /* Override default appearance */
+    -webkit-appearance: none;
     appearance: none;
-    width: 80%; /* Adjust the width as needed */
-    max-width: 3000px; /* Optional: Set a maximum width */
-    height: 15px; /* Increased height of the slider */
-    background: #ddd; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.7; /* Set transparency (optional) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    width: 80%;
+    max-width: 300px;
+    height: 15px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
     transition: opacity .2s;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 5px;
 }
 
-#rangeSlider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default appearance */
+#rangeSlider::-webkit-slider-thumb, #rangeSlider::-moz-range-thumb {
+    -webkit-appearance: none;
     appearance: none;
-    width: 25px; /* Increased width and height */
+    width: 25px;
     height: 25px;
-    background: #4CAF50; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-    border-radius: 50%; /* Circular shape */
+    background: #4CAF50;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
-#rangeSlider::-moz-range-thumb {
-    width: 25px; /* Increased width and height */
-    height: 25px;
-    background: #4CAF50; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-    border-radius: 50%; /* Circular shape */
-}
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .close {
@@ -176,32 +150,20 @@ body {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-#restartGame {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-}
-
 #gameContainer {
     margin: auto;
-    max-width: 95%; /* Adjust based on your preference */
+    max-width: 95%;
     max-height: 95%;
     padding: 20px;
-    background-color: #fff; /* Background color for the game area */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
-    border-radius: 10px; /* Rounded corners for the frame */
-    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
 }
 
 @keyframes shake {

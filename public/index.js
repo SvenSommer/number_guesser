@@ -7,42 +7,31 @@ const rangeValue = document.getElementById('rangeValue');
 const buttonsContainer = document.getElementById('buttons');
 const progressBar = document.getElementById('progressBar');
 const progressText = document.getElementById('progressText');
-
+const preferencesIcon = document.getElementById('preferencesIcon');
+const restartButton = document.getElementById('restartButton');
 
 // State
 let maxNumber = MAX_NUMBER_DEFAULT;
 let maxAttempts;
 let attemptCount = 0;
 
-// Initialize the game
-window.onload = () => {
-    initializeGame();
-    rangeSlider.addEventListener('input', handleSliderChange);
-};
-
-document.getElementById('preferencesIcon').addEventListener('click', function() {
-    var panel = document.getElementById('preferencesPanel');
-    if (panel.classList.contains('hidden')) {
-        panel.classList.remove('hidden');
-    } else {
-        panel.classList.add('hidden');
-    }
-});
-
+// Event Listeners
+window.onload = initializeGame;
+rangeSlider.addEventListener('input', handleSliderChange);
+preferencesIcon.addEventListener('click', togglePreferencesPanel);
+restartButton.addEventListener('click', restartGame);
 
 function initializeGame() {
     fetch('/start')
         .then(response => response.json())
-        .then(() => {
-            setupGame();
-        });
+        .then(setupGame);
 }
 
 function setupGame() {
     maxNumber = parseInt(rangeSlider.value, 10);
     maxAttempts = calculateMaxAttempts(maxNumber);
     attemptCount = 0;
-    updateProgressBar(); // Update progress bar on game setup
+    updateProgressBar();
     createButtons(maxNumber);
     fetchGameStart();
 }
@@ -50,9 +39,7 @@ function setupGame() {
 function fetchGameStart() {
     fetch(`/start?maxNumber=${maxNumber}`)
         .then(response => response.json())
-        .then(data => {
-            createButtons(data.maxNumber);
-        });
+        .then(data => createButtons(data.maxNumber));
 }
 
 function handleSliderChange() {
@@ -62,24 +49,31 @@ function handleSliderChange() {
 
 function createButtons(number) {
     buttonsContainer.innerHTML = '';
-    const gridSize = Math.ceil(Math.sqrt(number));
-    const buttonBasis = (100 / gridSize) - 2;
-    const buttonFontSize = Math.max(16, 600 / gridSize); // Minimum font size of 16px
+    const buttonSize = calculateButtonSize(number);
 
     for (let i = 1; i <= number; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        button.id = `btn-${i}`;
-        button.style.flexBasis = `${buttonBasis}%`;
-        button.style.height = `${buttonBasis}%`; // Adjust height as well
-        button.style.fontSize = `${buttonFontSize}px`; // Dynamic font size
-        button.addEventListener('click', () => makeGuess(i));
+        const button = createButton(i, buttonSize);
         buttonsContainer.appendChild(button);
     }
 }
 
+function calculateButtonSize(number) {
+    const gridSize = Math.ceil(Math.sqrt(number));
+    const buttonBasis = (100 / gridSize) - 2;
+    const buttonFontSize = Math.max(16, 600 / gridSize); // Minimum font size of 16px
+    return { basis: buttonBasis, fontSize: buttonFontSize };
+}
 
-
+function createButton(index, size) {
+    const button = document.createElement('button');
+    button.textContent = index;
+    button.id = `btn-${index}`;
+    button.style.flexBasis = `${size.basis}%`;
+    button.style.height = `${size.basis}%`;
+    button.style.fontSize = `${size.fontSize}px`;
+    button.addEventListener('click', () => makeGuess(index));
+    return button;
+}
 
 function calculateMaxAttempts(number) {
     return Math.ceil(Math.log2(number));
@@ -91,7 +85,7 @@ function makeGuess(number) {
     updateProgressBar();
 
     if (attemptCount > maxAttempts) {
-        gameOver()
+        gameOver();
         return;
     }
 
@@ -109,6 +103,7 @@ function handleGuessResponse(data, guessedNumber) {
         updateButtonVisibility(data.result, guessedNumber);
     }
 }
+
 function gameOver() {
     const modal = document.getElementById('gameOverModal');
     modal.style.display = 'block';
@@ -124,9 +119,6 @@ function gameOver() {
         restartGame();
     }
 }
-
-
-
 
 function showWinningMessage() {
     // Trigger confetti
@@ -166,15 +158,18 @@ function updateProgressBar() {
     progressBar.style.backgroundColor = `rgb(255, ${greenValue}, 0)`;
 }
 
-
-document.getElementById('restartButton').addEventListener('click', restartGame);
+function togglePreferencesPanel() {
+    const panel = document.getElementById('preferencesPanel');
+    panel.classList.toggle('hidden');
+}
 
 function restartGame() {
     document.getElementById('winMessage').classList.add('hidden');
     attemptCount = 0;
     setupGame();
-    // Reset other game elements as needed
 }
+
+setInterval(applyRandomShakeEffect, 2000);
 
 function applyRandomShakeEffect() {
     const buttons = Array.from(document.querySelectorAll('#buttons button')).filter(button => button.style.visibility !== 'hidden');
@@ -193,6 +188,3 @@ function applyRandomShakeEffect() {
         buttonToShake.classList.remove('shake');
     }, 500); // Match this duration with the CSS animation duration
 }
-
-// Apply the effect to a random button every second
-setInterval(applyRandomShakeEffect, 2000);
