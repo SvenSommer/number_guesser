@@ -20,6 +20,16 @@ window.onload = () => {
     rangeSlider.addEventListener('input', handleSliderChange);
 };
 
+document.getElementById('preferencesIcon').addEventListener('click', function() {
+    var panel = document.getElementById('preferencesPanel');
+    if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+    } else {
+        panel.classList.add('hidden');
+    }
+});
+
+
 function initializeGame() {
     fetch('/start')
         .then(response => response.json())
@@ -52,20 +62,22 @@ function handleSliderChange() {
 
 function createButtons(number) {
     buttonsContainer.innerHTML = '';
-    const gridSize = Math.ceil(Math.sqrt(number)); // Calculate grid size
-    const buttonWidth = (100 / gridSize) - 2; // Subtract margin for width
-    const buttonHeight = (window.innerHeight / gridSize) - 35; // Calculate height based on window height
+    const gridSize = Math.ceil(Math.sqrt(number));
+    const buttonBasis = (100 / gridSize) - 2;
+    const buttonFontSize = Math.max(16, 600 / gridSize); // Minimum font size of 16px
 
     for (let i = 1; i <= number; i++) {
         const button = document.createElement('button');
         button.textContent = i;
         button.id = `btn-${i}`;
-        button.style.flexBasis = `${buttonWidth}%`;
-        button.style.height = `${buttonHeight}px`; // Set height
+        button.style.flexBasis = `${buttonBasis}%`;
+        button.style.height = `${buttonBasis}%`; // Adjust height as well
+        button.style.fontSize = `${buttonFontSize}px`; // Dynamic font size
         button.addEventListener('click', () => makeGuess(i));
         buttonsContainer.appendChild(button);
     }
 }
+
 
 
 
@@ -109,7 +121,7 @@ function gameOver() {
     const restartButton = document.getElementById('restartGame');
     restartButton.onclick = function() {
         modal.style.display = 'none';
-        restartGame(); // Assuming you have a function to restart the game
+        restartGame();
     }
 }
 
@@ -163,3 +175,24 @@ function restartGame() {
     setupGame();
     // Reset other game elements as needed
 }
+
+function applyRandomShakeEffect() {
+    const buttons = Array.from(document.querySelectorAll('#buttons button')).filter(button => button.style.visibility !== 'hidden');
+    
+    if (buttons.length === 0) {
+        return; 
+    }
+
+    const randomButtonIndex = Math.floor(Math.random() * buttons.length);
+    const buttonToShake = buttons[randomButtonIndex];
+
+    buttonToShake.classList.add('shake');
+
+    // Remove the shake effect after some time
+    setTimeout(() => {
+        buttonToShake.classList.remove('shake');
+    }, 500); // Match this duration with the CSS animation duration
+}
+
+// Apply the effect to a random button every second
+setInterval(applyRandomShakeEffect, 2000);

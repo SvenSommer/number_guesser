@@ -6,33 +6,42 @@
     <title>Number Guessing Game</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
-    <h1>Guess the Number</h1>
-    <div>
-        <label for="rangeSlider">Select range (10 - 1000): </label>
-        <input type="range" id="rangeSlider" min="10" max="1000" value="100">
-        <span id="rangeValue">100</span>
-    </div>
-
-    <div id="progressBarContainer">
-        <div id="progressBar">
-            <span id="progressText">Attempts: 0</span>
+    <div id="gameContainer">
+        <!-- Preferences Icon -->
+       
+        
+        <!-- Hidden Preferences Panel -->
+        <div id="preferencesPanel" class="hidden">
+            <label for="rangeSlider">Numbers:</label>
+            <input type="range" id="rangeSlider" min="10" max="1000" value="100">
+            <span id="rangeValue">100</span>
         </div>
-    </div>
+       
+        <div id="progressBarContainer">
+            <div id="progressBar">
+                <span id="progressText">Attempts: 0</span>
+            </div>
+        </div>
+        <div id="preferencesIcon" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">
+            <i class="fas fa-cog"></i>
+        </div>
 
-    <div id="buttons"></div>
-    <div id="winMessage" class="hidden">
-        <p>Congratulations! You guessed the right number!</p>
-        <button id="restartButton">Restart Game</button>
-    </div>
-    <div id="gameOverModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Game Over</h2>
-            <p>You've exceeded the maximum number of attempts.</p>
-            <button id="restartGame">Restart Game</button>
+        <div id="buttons"></div>
+        <div id="winMessage" class="hidden">
+            <p>Congratulations! You guessed the right number!</p>
+            <button id="restartButton">Restart Game</button>
+        </div>
+        <div id="gameOverModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Game Over</h2>
+                <p>You've exceeded the maximum number of attempts.</p>
+                <button id="restartGame">Restart Game</button>
+            </div>
         </div>
     </div>
 

@@ -3,6 +3,30 @@ body {
     text-align: center;
     padding: 20px;
 }
+.hidden {
+    display: none;
+}
+#preferencesPanel {
+    position: absolute;
+    top: 40px; /* Adjust based on the size of your icon */
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 2; /* Higher z-index */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preferencesIcon i {
+    font-size: 24px; /* Adjust the size as needed */
+    color: #333; /* Adjust the color as needed */
+}
+
+
 
 #buttons {
     display: flex;
@@ -30,12 +54,15 @@ body {
 #buttons button:hover {
     background-color: #45a049;
 }
+
 #progressBarContainer {
     width: 100%;
     background-color: #eee;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 5px;
     margin: 10px 0;
     position: relative;
+    z-index: 1; /* Lower z-index */
 }
 
 #progressBar {
@@ -93,7 +120,8 @@ body {
 #rangeSlider {
     -webkit-appearance: none; /* Override default appearance */
     appearance: none;
-    width: 20%; /* Full-width */
+    width: 80%; /* Adjust the width as needed */
+    max-width: 3000px; /* Optional: Set a maximum width */
     height: 15px; /* Increased height of the slider */
     background: #ddd; /* Grey background */
     outline: none; /* Remove outline */
@@ -164,3 +192,34 @@ body {
     cursor: pointer;
     font-size: 1em;
 }
+
+#gameContainer {
+    margin: auto;
+    max-width: 95%; /* Adjust based on your preference */
+    max-height: 95%;
+    padding: 20px;
+    background-color: #fff; /* Background color for the game area */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Shadow effect */
+    border-radius: 10px; /* Rounded corners for the frame */
+    text-align: center;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  
+  .shake {
+    animation: shake 0.5s; /* Adjust duration as needed */
+    animation-iteration-count: infinite;
+  }
+  
